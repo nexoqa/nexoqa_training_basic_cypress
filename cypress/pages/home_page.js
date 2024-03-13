@@ -1,13 +1,20 @@
 import CreateSongPage from '../pages/create_song_page'
+import ViewSongPage from '../pages/view_song_page'
 
 class HomePage{
 
   #addButton = "";
-  #titleSongs = ""
+  #songs = []
+
 
   constructor(){
     this.#addButton = cy.get('a[href="#/songs/create"]');
-    this.#titleSongs = cy.get('div.song-title');
+    this.#songs = cy.get('div.song');
+  }
+
+  viewSong(title){
+    this.#songs.contains(title).siblings("a.btn").click();
+    return new ViewSongPage()
   }
 
   getAddButton(){
@@ -19,9 +26,6 @@ class HomePage{
     return new CreateSongPage();
   }
 
-  getTitleSongs(){
-    return this.#titleSongs;
-  }
 
 }
 
